@@ -1,6 +1,4 @@
-"use client"
-
-import Link from "next/link"
+import { Link } from "react-router-dom"
 import { useUserProfile } from "@/hooks/use-user-profile"
 
 export function FollowingCollections() {
@@ -12,7 +10,7 @@ export function FollowingCollections() {
     <ul className="flex flex-wrap gap-2">
       {state.followedCollectionSlugs.map((slug) => (
         <li key={slug} className="flex items-center gap-2 border rounded-md px-2 py-1">
-          <Link href={`/collections/${slug}`} className="underline">
+          <Link to={`/collections/${slug}`} className="underline">
             {slug}
           </Link>
         </li>

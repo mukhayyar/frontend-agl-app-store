@@ -1,24 +1,27 @@
-import Image from "next/image"
-import Link from "next/link"
-import { notFound } from "next/navigation"
+import { useParams, Link } from "react-router-dom"
 import { getAppBySlug } from "@/lib/data/apps"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { FavoriteToggle } from "@/components/favorite-toggle"
 
-export default function AppDetailsPage({
-  params,
-}: {
-  params: { slug: string }
-}) {
-  const app = getAppBySlug(params.slug)
-  if (!app) return notFound()
+export default function AppDetailsPage() {
+  const { slug } = useParams<{ slug: string }>()
+  const app = getAppBySlug(slug!)
+  if (!app) return (
+    <main className="container mx-auto px-4 py-16 text-center">
+      <h1 className="text-2xl font-semibold text-foreground">App not found</h1>
+      <p className="text-muted-foreground mt-2">The app you are looking for does not exist.</p>
+      <div className="mt-6">
+        <Link to="/" className="text-primary underline underline-offset-4">{"← Back to catalog"}</Link>
+      </div>
+    </main>
+  )
 
   return (
     <main className="container mx-auto px-4 py-8">
       <nav className="mb-4">
-        <Link href="/" className="text-primary underline underline-offset-4">
+        <Link to="/" className="text-primary underline underline-offset-4">
           {"← Back to catalog"}
         </Link>
       </nav>
@@ -26,7 +29,7 @@ export default function AppDetailsPage({
       <header className="flex items-start gap-4">
         <div className="h-16 w-16 rounded-md overflow-hidden bg-muted flex items-center justify-center">
           {app.iconUrl ? (
-            <Image src={app.iconUrl || "/placeholder.svg"} alt={`${app.name} icon`} width={64} height={64} />
+            <img src={app.iconUrl} alt={`${app.name} icon`} width={64} height={64} />
           ) : (
             <span className="text-base text-muted-foreground">{app.name[0]}</span>
           )}
@@ -47,9 +50,9 @@ export default function AppDetailsPage({
           {app.screenshots?.length ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {app.screenshots.map((src, i) => (
-                <Image
+                <img
                   key={i}
-                  src={src || "/placeholder.svg"}
+                  src={src}
                   width={1280}
                   height={720}
                   alt={`${app.name} screenshot ${i + 1}`}

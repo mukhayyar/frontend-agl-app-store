@@ -1,11 +1,11 @@
-import Link from "next/link"
+import { Link } from "react-router-dom"
 
 export default function ComparePage() {
   return (
     <main className="container mx-auto max-w-4xl p-4">
       <header className="mb-6">
         <nav className="mb-3" aria-label="Breadcrumb">
-          <Link href="/" className="text-primary underline underline-offset-4">
+          <Link to="/" className="text-primary underline underline-offset-4">
             {"← Go to Home"}
           </Link>
         </nav>
@@ -17,8 +17,8 @@ export default function ComparePage() {
 
       <section className="rounded-lg border bg-card p-4">
         <p className="text-sm text-muted-foreground">
-          Coming soon: choose two apps and see a side-by-side feature matrix. If you want this now, say “Yes to Compare”
-          and I’ll implement the selector and matrix next.
+          Coming soon: choose two apps and see a side-by-side feature matrix. If you want this now, say "Yes to Compare"
+          and I'll implement the selector and matrix next.
         </p>
       </section>
     </main>

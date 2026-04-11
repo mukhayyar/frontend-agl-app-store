@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { Link } from "react-router-dom"
 
 export default function NotFound() {
   return (
@@ -6,7 +6,7 @@ export default function NotFound() {
       <h1 className="text-2xl font-semibold text-foreground">App not found</h1>
       <p className="text-muted-foreground mt-2">The app you are looking for does not exist.</p>
       <div className="mt-6">
-        <Link href="/" className="text-primary underline underline-offset-4">
+        <Link to="/" className="text-primary underline underline-offset-4">
           {"← Back to catalog"}
         </Link>
       </div>

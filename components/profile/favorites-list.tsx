@@ -1,12 +1,9 @@
-"use client"
-
 import useSWR from "swr"
 import { useUserProfile } from "@/hooks/use-user-profile"
 import type { AppItem } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { AppCard } from "@/components/app-card"
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
+import { fetcher } from "@/src/lib/fetcher"
 
 export function FavoritesList() {
   const { state } = useUserProfile()
@@ -15,7 +12,7 @@ export function FavoritesList() {
   const { data } = useSWR<{ items: AppItem[] }>(query, fetcher)
 
   if (!slugs.length) {
-    return <p className="text-muted-foreground">No favorites yet. Open any app and press “Favorite”.</p>
+    return <p className="text-muted-foreground">No favorites yet. Open any app and press "Favorite".</p>
   }
 
   const items = data?.items || []

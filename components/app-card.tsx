@@ -1,7 +1,4 @@
-"use client"
-
-import Link from "next/link"
-import Image from "next/image"
+import { Link } from "react-router-dom"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import type { AppItem } from "@/lib/types"
@@ -14,14 +11,14 @@ export function AppCard({ app }: { app: AppItem }) {
       <CardHeader className="flex flex-row items-center gap-4">
         <div className="h-12 w-12 rounded-md overflow-hidden bg-muted flex items-center justify-center">
           {app.iconUrl ? (
-            <Image src={app.iconUrl || "/placeholder.svg"} alt={`${app.name} icon`} width={48} height={48} />
+            <img src={app.iconUrl} alt={`${app.name} icon`} width={48} height={48} />
           ) : (
             <span className="text-sm text-muted-foreground">{app.name[0]}</span>
           )}
         </div>
         <div className="min-w-0">
           <CardTitle className="text-foreground text-pretty truncate">
-            <Link href={`/apps/${app.slug}`} aria-label={`View details for ${app.name}`} className="no-underline">
+            <Link to={`/apps/${app.slug}`} aria-label={`View details for ${app.name}`} className="no-underline">
               {app.name}
             </Link>
           </CardTitle>

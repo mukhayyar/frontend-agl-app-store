@@ -1,34 +1,36 @@
-import Image from "next/image"
-import Link from "next/link"
-import { notFound } from "next/navigation"
+import { useParams, Link } from "react-router-dom"
 import { getBrandBySlug, getAppsForBrand } from "@/lib/data/brands"
 import { Button } from "@/components/ui/button"
 import { AppCard } from "@/components/app-card"
 
-export default function BrandDetailsPage({ params }: { params: { slug: string } }) {
-  const brand = getBrandBySlug(params.slug)
-  if (!brand) return notFound()
+export default function BrandDetailsPage() {
+  const { slug } = useParams<{ slug: string }>()
+  const brand = getBrandBySlug(slug!)
+  if (!brand) return (
+    <main className="container mx-auto px-4 py-16 text-center">
+      <h1 className="text-2xl font-semibold text-foreground">Brand not found</h1>
+      <div className="mt-6">
+        <Link to="/brands" className="text-primary underline underline-offset-4">{"← Back to brands"}</Link>
+      </div>
+    </main>
+  )
 
   const apps = getAppsForBrand(brand.slug)
 
   return (
     <main className="container mx-auto px-4 py-8">
       <nav className="mb-4" aria-label="Breadcrumb">
-        <Link href="/" className="text-primary underline underline-offset-4 mr-3" aria-label="Go to Home">
+        <Link to="/" className="text-primary underline underline-offset-4 mr-3" aria-label="Go to Home">
           {"← Home"}
         </Link>
-        <Link
-          href="/brands"
-          className="text-primary underline underline-offset-4"
-          aria-label="Back to Brands directory"
-        >
+        <Link to="/brands" className="text-primary underline underline-offset-4" aria-label="Back to Brands directory">
           {"Back to brands"}
         </Link>
       </nav>
 
       <header className="flex items-start gap-4">
         <div className="h-16 w-16 rounded-md overflow-hidden bg-muted flex items-center justify-center">
-          <Image src={brand.logoUrl || "/placeholder-logo.svg"} alt={`${brand.name} logo`} width={64} height={64} />
+          <img src={brand.logoUrl || "/placeholder-logo.svg"} alt={`${brand.name} logo`} width={64} height={64} />
         </div>
         <div className="min-w-0">
           <h1 className="text-3xl font-semibold text-foreground text-pretty">{brand.name}</h1>

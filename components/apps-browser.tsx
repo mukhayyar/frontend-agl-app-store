@@ -1,5 +1,3 @@
-"use client"
-
 import useSWR from "swr"
 import * as React from "react"
 import { allCategories } from "@/lib/data/apps"
@@ -8,10 +6,9 @@ import { AppCard } from "@/components/app-card"
 import { SearchInput } from "@/components/search-input"
 import { CategoryTabs } from "@/components/category-tabs"
 import { BrandFilter } from "@/components/brand-filter"
+import { fetcher } from "@/src/lib/fetcher"
 
 type AppsResponse = { apps: AppItem[] }
-
-const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export function AppsBrowser() {
   const [search, setSearch] = React.useState("")

@@ -1,5 +1,4 @@
-import Link from "next/link"
-import Image from "next/image"
+import { Link } from "react-router-dom"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export function CollectionCard({
@@ -16,11 +15,11 @@ export function CollectionCard({
   count?: number
 }) {
   return (
-    <Link href={href} className="block no-underline">
+    <Link to={href} className="block no-underline">
       <Card className="transition-colors hover:bg-accent">
         <CardHeader className="flex items-center gap-3">
           <div className="h-12 w-12 rounded-md overflow-hidden bg-muted flex items-center justify-center">
-            <Image
+            <img
               src={iconUrl || "/placeholder.svg?height=48&width=48&query=collection%20icon"}
               alt={`${name} icon`}
               width={48}
