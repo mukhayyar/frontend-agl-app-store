@@ -22,6 +22,18 @@ async function getApp(id: string): Promise<AppItem | null> {
   }
 }
 
+function getExpiryInfo(expiresAt?: string): { label: string; color: string } | null {
+  if (!expiresAt) return null
+  const now = Date.now()
+  const exp = new Date(expiresAt).getTime()
+  const days = Math.ceil((exp - now) / (1000 * 60 * 60 * 24))
+  if (exp <= now) return { label: "Expired", color: "text-red-600 bg-red-50 border-red-200" }
+  if (days <= 1)  return { label: "Expires today", color: "text-red-600 bg-red-50 border-red-200" }
+  if (days <= 7)  return { label: `${days} days left`, color: "text-orange-600 bg-orange-50 border-orange-200" }
+  if (days <= 30) return { label: `${days} days left`, color: "text-yellow-600 bg-yellow-50 border-yellow-200" }
+  return { label: `Expires ${new Date(expiresAt).toLocaleDateString()}`, color: "text-muted-foreground bg-muted border-border" }
+}
+
 export default async function AppDetailsPage({
   params,
 }: {
@@ -62,9 +74,14 @@ export default async function AppDetailsPage({
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4">
                   <path fillRule="evenodd" d="M16.403 12.652a3 3 0 0 0 0-5.304 3 3 0 0 0-3.75-3.751 3 3 0 0 0-5.305 0 3 3 0 0 0-3.751 3.75 3 3 0 0 0 0 5.305 3 3 0 0 0 3.75 3.751 3 3 0 0 0 5.305 0 3 3 0 0 0 3.751-3.75Zm-2.546-4.46a.75.75 0 0 0-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clipRule="evenodd" />
                 </svg>
-                Verified by AGL Store
+                Verified by PensHub
               </span>
             )}
+            {(() => { const e = getExpiryInfo(app.expires_at); return e ? (
+              <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium border ${e.color}`}>
+                ⏱ {e.label}
+              </span>
+            ) : null })()}
           </div>
           {app.summary && <p className="text-muted-foreground mt-3 text-base">{app.summary}</p>}
         </div>
@@ -135,6 +152,14 @@ export default async function AppDetailsPage({
                   <div className="flex justify-between">
                     <dt className="text-muted-foreground">Updated</dt>
                     <dd>{new Date(app.updated_at).toLocaleDateString()}</dd>
+                  </div>
+                )}
+                {app.expires_at && (
+                  <div className="flex justify-between">
+                    <dt className="text-muted-foreground">Certificate expires</dt>
+                    <dd className={Math.ceil((new Date(app.expires_at).getTime() - Date.now()) / 86400000) <= 7 ? "text-orange-600 font-medium" : ""}>
+                      {new Date(app.expires_at).toLocaleDateString()}
+                    </dd>
                   </div>
                 )}
               </dl>

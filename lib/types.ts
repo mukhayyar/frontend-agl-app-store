@@ -13,6 +13,7 @@ export type AppItem = {
   updated_at?: string
   added_at?: string
   is_verified?: boolean
+  expires_at?: string
 }
 
 export type CategoryItem = {

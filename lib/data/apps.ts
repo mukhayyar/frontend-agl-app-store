@@ -18,5 +18,6 @@ export function normalizeApp(raw: any): AppItem {
     updated_at: raw.updated_at,
     added_at: raw.added_at,
     is_verified: raw.is_verified,
+    expires_at: raw.expires_at,
   }
 }

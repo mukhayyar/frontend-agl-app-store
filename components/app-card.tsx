@@ -8,6 +8,24 @@ import { Badge } from "@/components/ui/badge"
 import type { AppItem } from "@/lib/types"
 import { useWishlistStore } from "@/lib/store"
 
+function ExpiryBadge({ expiresAt }: { expiresAt?: string }) {
+  if (!expiresAt) return null
+  const now = Date.now()
+  const exp = new Date(expiresAt).getTime()
+  const diffMs = exp - now
+  const days = Math.ceil(diffMs / (1000 * 60 * 60 * 24))
+
+  if (diffMs <= 0)
+    return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700 border border-red-200">⚠ Expired</span>
+  if (days <= 1)
+    return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-700 border border-red-200">⚠ Expires today</span>
+  if (days <= 7)
+    return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-700 border border-orange-200">⏱ {days} days left</span>
+  if (days <= 30)
+    return <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700 border border-yellow-200">⏱ {days} days left</span>
+  return null
+}
+
 export function AppCard({ app }: { app: AppItem }) {
   const { has, toggle } = useWishlistStore()
   const wishlisted = has(app.id)
@@ -50,8 +68,9 @@ export function AppCard({ app }: { app: AppItem }) {
               </Badge>
             )}
             {app.is_verified && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">&#10003; Verified by AGL Store</span>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">&#10003; Verified by PensHub</span>
             )}
+            <ExpiryBadge expiresAt={app.expires_at} />
           </div>
         </div>
       </CardHeader>
