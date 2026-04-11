@@ -7,7 +7,9 @@ export async function GET() {
     const res = await fetch(`${BACKEND}/categories`, { next: { revalidate: 3600 } })
     if (!res.ok) throw new Error()
     const cats = await res.json()
-    return NextResponse.json({ categories: cats })
+    // Backend returns [{name, description}, ...] but AppsBrowser expects string[]
+    const names: string[] = cats.map((c: { name: string }) => c.name)
+    return NextResponse.json({ categories: names })
   } catch {
     return NextResponse.json({ categories: [] })
   }

@@ -50,7 +50,7 @@ export function AppCard({ app }: { app: AppItem }) {
               </Badge>
             )}
             {app.is_verified && (
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">&#10003; Verified</span>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-700 border border-green-200">&#10003; Verified by AGL Store</span>
             )}
           </div>
         </div>
