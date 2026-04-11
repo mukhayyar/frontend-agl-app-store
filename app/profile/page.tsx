@@ -1,3 +1,5 @@
+"use client"
+
 import { ProfileHeader } from "@/components/profile/profile-header"
 import { FavoritesList } from "@/components/profile/favorites-list"
 import { FollowingBrands } from "@/components/profile/following-brands"

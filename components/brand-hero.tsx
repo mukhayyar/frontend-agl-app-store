@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import Link from "next/link"
 import { brands } from "@/lib/data/brands"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -26,7 +26,7 @@ export function BrandHero() {
         </div>
         <div className="flex flex-wrap gap-2 w-full sm:w-auto">
           <Button asChild className="flex-1 sm:flex-none">
-            <Link to={`/brands/${featured.slug}`}>View brand</Link>
+            <Link href={`/brands/${featured.slug}`}>View brand</Link>
           </Button>
           {featured.websiteUrl ? (
             <Button asChild variant="outline" className="flex-1 sm:flex-none">

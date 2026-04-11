@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom"
+"use client"
+
+import Link from "next/link"
 import { useUserProfile } from "@/hooks/use-user-profile"
 
 export function ProfileHeader() {
@@ -10,7 +12,7 @@ export function ProfileHeader() {
   return (
     <header className="mb-6">
       <nav aria-label="Breadcrumb" className="mb-2 text-sm">
-        <Link to="/" className="underline">
+        <Link href="/" className="underline">
           Home
         </Link>
         <span className="mx-2 text-muted-foreground">/</span>

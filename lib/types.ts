@@ -1,43 +1,38 @@
-export type AppCategory = "Audio" | "Graphics" | "Productivity" | "Development" | "Utilities" | "Games"
-
 export type AppItem = {
-  slug: string
-  id: string
+  id: string           // reverse domain ID, used as URL slug too
   name: string
-  summary: string
-  description: string
-  developer: string
-  category: AppCategory
-  license?: string
-  homepageUrl?: string
-  repoUrl?: string
-  flathubId?: string
-  iconUrl?: string
-  screenshots?: string[]
-  tags?: string[]
-  // New: many-to-many brands by slug
-  brands?: string[]
-  installs?: number
-  updatedAt?: string
-  features?: Record<string, unknown>
-}
-
-export type BrandItem = {
-  slug: string
-  id: string
-  name: string
+  summary?: string
   description?: string
-  logoUrl?: string
-  websiteUrl?: string
-  featured?: boolean
+  developer?: string   // maps from developer_name
+  category?: string    // first category if any
+  license?: string     // maps from project_license
+  homepageUrl?: string
+  iconUrl?: string     // maps from icon
+  screenshots?: string[]
+  categories?: string[]
+  updated_at?: string
+  added_at?: string
+  is_verified?: boolean
 }
 
-// New: CollectionItem type
+export type CategoryItem = {
+  name: string        // slug e.g. "AudioVideo"
+  description?: string
+  displayName?: string
+}
+
+export type PlatformStats = {
+  total_apps: number
+  total_users: number
+  total_categories: number
+}
+
+// Static curated collections (editorial, not from backend)
 export type CollectionItem = {
   slug: string
   id: string
   name: string
   description?: string
-  iconUrl?: string
-  appSlugs: string[]
+  iconUrl?: string | null
+  appIds: string[]
 }

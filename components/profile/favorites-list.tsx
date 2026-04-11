@@ -1,9 +1,12 @@
+"use client"
+
 import useSWR from "swr"
 import { useUserProfile } from "@/hooks/use-user-profile"
 import type { AppItem } from "@/lib/types"
 import { Button } from "@/components/ui/button"
 import { AppCard } from "@/components/app-card"
-import { fetcher } from "@/src/lib/fetcher"
+
+const fetcher = (url: string) => fetch(url).then((r) => r.json())
 
 export function FavoritesList() {
   const { state } = useUserProfile()
@@ -32,7 +35,7 @@ export function FavoritesList() {
       </div>
       <div role="list" aria-label="Favorite apps" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((app) => (
-          <div role="listitem" key={app.slug}>
+          <div role="listitem" key={app.id}>
             <AppCard app={app} />
           </div>
         ))}

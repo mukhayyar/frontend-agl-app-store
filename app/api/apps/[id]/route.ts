@@ -3,9 +3,10 @@ import { normalizeApp } from "@/lib/data/apps"
 
 const BACKEND = process.env.BACKEND_URL || "https://api.agl-store.cyou"
 
-export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
   try {
-    const res = await fetch(`${BACKEND}/apps/${encodeURIComponent(params.id)}`, {
+    const res = await fetch(`${BACKEND}/apps/${encodeURIComponent(id)}`, {
       next: { revalidate: 300 },
     })
     if (!res.ok) return NextResponse.json(null, { status: 404 })

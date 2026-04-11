@@ -7,7 +7,7 @@ export async function GET() {
     const res = await fetch(`${BACKEND}/categories`, { next: { revalidate: 3600 } })
     if (!res.ok) throw new Error()
     const cats = await res.json()
-    return NextResponse.json({ categories: cats.map((c: any) => c.name) })
+    return NextResponse.json({ categories: cats })
   } catch {
     return NextResponse.json({ categories: [] })
   }

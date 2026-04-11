@@ -1,12 +1,11 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import type { AppCategory } from "@/lib/types"
 
 export function CategoryTabs({
   categories,
   value,
   onValueChange,
 }: {
-  categories: AppCategory[]
+  categories: string[]
   value: string
   onValueChange: (v: string) => void
 }) {

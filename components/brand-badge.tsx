@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom"
+"use client"
+
+import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 
 export function BrandBadge({ slug, name }: { slug: string; name: string }) {
   return (
     <Link
-      to={`/brands/${slug}`}
+      href={`/brands/${slug}`}
       aria-label={`View ${name} brand`}
       onClick={(e) => {
         e.stopPropagation()

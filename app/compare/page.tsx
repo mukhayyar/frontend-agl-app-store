@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom"
+import Link from "next/link"
 
 export default function ComparePage() {
   return (
     <main className="container mx-auto max-w-4xl p-4">
       <header className="mb-6">
         <nav className="mb-3" aria-label="Breadcrumb">
-          <Link to="/" className="text-primary underline underline-offset-4">
+          <Link href="/" className="text-primary underline underline-offset-4">
             {"← Go to Home"}
           </Link>
         </nav>

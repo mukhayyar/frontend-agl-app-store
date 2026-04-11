@@ -18,8 +18,8 @@ export function CollectionsPreview() {
             href={`/collections/${c.slug}`}
             name={c.name}
             description={c.description}
-            iconUrl={c.iconUrl}
-            count={c.appSlugs.length}
+            iconUrl={c.iconUrl ?? undefined}
+            count={c.appIds.length}
           />
         ))}
       </div>

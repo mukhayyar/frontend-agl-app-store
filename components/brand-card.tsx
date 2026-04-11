@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import Link from "next/link"
 import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card"
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 export function BrandCard({ href, name, description, logoUrl }: Props) {
   return (
-    <Link to={href} className="block">
+    <Link href={href} className="block">
       <Card className="transition-colors hover:border-foreground/20">
         <CardHeader className="flex flex-row items-center gap-4">
           <img
