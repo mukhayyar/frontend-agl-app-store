@@ -10,8 +10,8 @@ export function BrandHero() {
 
   return (
     <Card className="mb-8">
-      <CardContent className="p-6 flex items-center gap-4">
-        <div className="h-14 w-14 rounded-md overflow-hidden bg-muted flex items-center justify-center">
+      <CardContent className="p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div className="h-14 w-14 rounded-md overflow-hidden bg-muted flex items-center justify-center shrink-0">
           <Image
             src={featured.logoUrl || "/placeholder-logo.svg"}
             alt={`${featured.name} logo`}
@@ -25,12 +25,12 @@ export function BrandHero() {
             <p className="text-sm text-muted-foreground line-clamp-2 mt-1">{featured.description}</p>
           ) : null}
         </div>
-        <div className="flex gap-2">
-          <Button asChild>
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
+          <Button asChild className="flex-1 sm:flex-none">
             <Link href={`/brands/${featured.slug}`}>View brand</Link>
           </Button>
           {featured.websiteUrl ? (
-            <Button asChild variant="outline">
+            <Button asChild variant="outline" className="flex-1 sm:flex-none">
               <a href={featured.websiteUrl} target="_blank" rel="noreferrer">
                 Website
               </a>
