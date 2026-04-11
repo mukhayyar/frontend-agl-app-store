@@ -13,7 +13,7 @@
 import { FlathubServiceClient } from './generated/FlathubServiceClientPb'
 
 const GRPC_WEB_URL =
-  process.env.NEXT_PUBLIC_GRPC_WEB_URL || 'https://grpc.agl-store.cyou'
+  import.meta.env.VITE_GRPC_WEB_URL || 'https://grpc.agl-store.cyou'
 
 let _client: FlathubServiceClient | null = null
 

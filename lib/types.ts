@@ -18,6 +18,8 @@ export type AppItem = {
   // New: many-to-many brands by slug
   brands?: string[]
   installs?: number
+  updatedAt?: string
+  features?: Record<string, unknown>
 }
 
 export type BrandItem = {
