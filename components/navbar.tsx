@@ -34,6 +34,10 @@ export function Navbar() {
             className="px-3 py-1.5 rounded-md hover:bg-accent hover:text-foreground transition-colors">
             Collections
           </Link>
+          <Link href="/install"
+            className="px-3 py-1.5 rounded-md hover:bg-accent hover:text-foreground transition-colors">
+            User Installation
+          </Link>
         </nav>
 
         {/* Right side */}
